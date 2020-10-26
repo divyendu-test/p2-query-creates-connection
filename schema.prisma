@@ -1,0 +1,39 @@
+datasource db {
+    provider = "postgresql"
+    url      = "postgresql://root:prisma@localhost:5432/basic-blog?schema=public&pgbouncer=true"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model authors {
+    id            Int             @id @default(autoincrement())
+    name          String?
+    authors_blogs authors_blogs[]
+}
+
+model authors_blogs {
+    author_id Int
+    blog_id   Int
+    authors   authors @relation(fields: [author_id], references: [id])
+    blogs     blogs   @relation(fields: [blog_id], references: [id])
+
+    @@unique([author_id, blog_id], name: "authors_blogs_author_id_blog_id_key")
+}
+
+model blogs {
+    id            Int             @id @default(autoincrement())
+    name          String
+    viewcount     Int
+    authors_blogs authors_blogs[]
+    posts         posts[]
+}
+
+model posts {
+    id      Int      @id @default(autoincrement())
+    blog_id Int
+    title   String
+    tags    String[]
+    blogs   blogs    @relation(fields: [blog_id], references: [id])
+}

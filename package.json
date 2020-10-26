@@ -1,0 +1,13 @@
+{
+  "name": "p2-und",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@prisma/cli": "2.10.0-dev.70"
+  },
+  "dependencies": {
+    "@prisma/client": "2.10.0-dev.70",
+    "pg": "8.4.1"
+  }
+}
